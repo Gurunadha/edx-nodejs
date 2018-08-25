@@ -14,12 +14,11 @@ fs.readFile('customer-data.csv', 'utf8', (error, data) => {
         return console.log(error)
     let json = []
         //converting each row of csv to an array
-    let dataArray = data.split('\n')
+    let dataArray = data.trim().split(/\r?\n/)
         //seperating the header content of csv
-    let headers = dataArray.shift().replace(/\r/g, '').split(',')
+    let headers = dataArray.shift().split(',')
     dataArray.forEach(row => {
         let obj = {}
-        row = row.replace(/\r/g, '')
         let rowArray = row.split(',')
         for (let i = 0; i < headers.length; i++) {
             //object to hold a row csv data in key-value pairs
@@ -28,7 +27,7 @@ fs.readFile('customer-data.csv', 'utf8', (error, data) => {
         json.push(obj)
     })
 
-    fs.writeFile(path.join(__dirname, 'customer-data.json'), JSON.stringify(json), 'utf8', (error) => {
+    fs.writeFile(path.join(__dirname, 'customer-data.json'), JSON.stringify(json, null, 4), 'utf8', (error) => {
         if (error)
             return console.error('erro while writing', error)
         console.log('conversion of csv to json is completed')
