@@ -5,7 +5,7 @@ const path = require('path')
     // csvToJson()
     //     .fromFile('customer-data.csv')
     //     .then((jsonObj) => {
-    //         console.log(jsonObj)
+    //         console.log(JSON.stringify(jsonObj))
     //     })
 
 //By using core node modules
